@@ -1,0 +1,29 @@
+.main {
+    width: 300px;
+    font-family: "times new roman", times, serif;
+    font-size: 14px;
+}
+
+#headImage {
+    width: 300px;
+}
+
+#settings {
+    float: right;
+    vertical-align: bottom;
+    margin-top: 10px;
+}
+
+#statusMessage {
+    font-size: 15px;
+    color: red;
+    hyphens: auto;
+}
+
+#waitImage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+}

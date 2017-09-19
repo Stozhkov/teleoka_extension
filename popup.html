@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<img id="headImage" src="head.png">
+<div class="main">
+    <div id="infoMessage" style="display: none">
+        <table width="100%">
+            <tr>
+                <td colspan="2" align="center"><b>Техническая поддержка</b></td>
+            </tr>
+            <tr>
+                <td width="50%">Телефоны</td>
+                <td width="50%" align="right">8(83171)2-20-14</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td align="right">8(83171)2-37-85</td>
+            </tr>
+            <tr>
+                <td width="50%">Электронная почта</td>
+                <td width="50%" align="right"><a href="mailto:support@teleoka.su" target="_top">support@teleoka.su</a></td>
+            </tr>
+            <tr>
+                <td width="50%">Сайт</td>
+                <td width="50%" align="right"><a href="Телеока.рф" target="_top">телеока.рф</a></td>
+            </tr>
+            <tr>
+                <td width="50%">Группа Вконтакте</td>
+                <td width="50%" align="right"><a href="https://vk.com/teleoka" target="_top">vk.com</a></td>
+            </tr>
+            <tr>
+                <td colspan="2">Режим работы технической поддержки - <b>КРУГЛОСУТОЧНЫЙ</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><b>Офис обслуживания абонентов</b></td>
+            </tr>
+            <tr>
+                <td>Адрес офиса:</td>
+                <td align="right">г. Павлово,<br>ул. Куйбышева д. 40</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">Режим работы офиса *</td>
+            </tr>
+            <tr>
+                <td align="right">Понедельник</td>
+                <td>8:30 - 19:00</td>
+            </tr>
+            <tr>
+                <td align="right">Вторник</td>
+                <td>8:30 - 19:00</td>
+            </tr>
+            <tr>
+                <td align="right">Среда</td>
+                <td>8:30 - 19:00</td>
+            </tr>
+            <tr>
+                <td align="right">Четверг</td>
+                <td>8:30 - 19:00</td>
+            </tr>
+            <tr>
+                <td align="right">Пятница</td>
+                <td>8:30 - 19:00</td>
+            </tr>
+            <tr>
+                <td align="right">Суббота</td>
+                <td>8:30 - 14:00</td>
+            </tr>
+            <tr>
+                <td align="right">Воскресенье</td>
+                <td>Выходной</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <small>* Режим работы может отличаться в праздничные дни</small>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="statusMessage" style="display: none"></div>
+    <div id="waitBlock" style="display: none; height: 200px; text-align: center; vertical-align: middle; display: inline-block;">
+        <img id="waitImage" src='wait.gif'>
+    </div>
+    <div id="config_data" style="display: none">
+            <table width="100%">
+                <tr>
+                    <td align="center">
+                        <input id="uid_input" type="text" placeholder="Лицевой счет" maxlength="5" minlength="4" style="width: 150px">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input id="password_input" type="password" placeholder="Пароль" style="width: 150px" maxlength="20"><br>
+                                    <label>
+                                        <input id="showOrHidePassword" type="checkbox">Показать пароль
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input id="saveBtn" type="button" value="Сохранить">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="users_data" style="display: none">
+            <table id="mainTable" width="100%">
+                <tr>
+                    <td align="left">Лицевой счет</td>
+                    <td id="uid" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="packet_label" align="left">Тарифный план</td>
+                    <td id="packet" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="monthly_pay_label" align="left">Абонентская плата</td>
+                    <td id="monthly_pay" align="right"></td>
+                </tr>
+                <tr>
+                    <td align="left">Адрес подключения</td>
+                    <td id="address" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="deposit_label" align="left">Основной счет</td>
+                    <td id="deposit" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="bonus_label" align="left">Бонусный счет</td>
+                    <td id="bonus" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="summa_label" align="left">Общая сумма</td>
+                    <td id="summa" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="day_before_lock_label" align="left">Дней до отключения</td>
+                    <td id="day_before_lock" align="right"></td>
+                </tr>
+                <tr>
+                    <td id="date_of_lock_label" align="left">Дата отключения</td>
+                    <td id="date_of_lock" align="right"></td>
+                </tr>
+            </table>
+            <hr width="95%">
+        </div>
+        <script src="popup.js"></script>
+        <div id="links">
+            <a href="http://pay.teleoka.su"><img src="pay.png" id="payImage" title="Оплата банковской картой онлайн" style="width: 100px"></a>
+            <a href="http://телеока.рф"><img src="512.png" id="siteImage" title="Сайт Телеока.рф" style="width: 30px"></a>
+            <a href="http://abonent.teleoka.su"><img src="key.png" id="accountImage" title="Личный кабинет абонента" style="width: 30px"></a>
+            <div id="settings">
+                <table>
+                    <tr>
+                        <td>
+                            <img id="what" title="Информация" src="what.png" width="20px">
+                        </td>
+                        <td>
+                            <img id="img" title="Настройки" src="icons-settings.png" width="20px">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
