@@ -47,10 +47,21 @@ function notShowPacket() {
 
 }
 
+function setBadgeText(amountDays) {
+    chrome.browserAction.setBadgeText({text: amountDays.toString()});
+    if (amountDays < 6) {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+    } else {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [128, 128, 128, 255] });
+    }
+}
+
 function loadDataFromServer() {
 
     var uid = document.getElementById("uid_input").value;
     var password = document.getElementById("password_input").value;
+
+
 
     if ((uid != "") && (password != "")) {
 
@@ -58,7 +69,8 @@ function loadDataFromServer() {
         xhr.open("GET", "http://abonent.teleoka.su/chrome-extensions-gate.php?uid="
             + uid +"&password="
             + password +"&version="
-            + chrome.app.getDetails().version, true);
+            + chrome.app.getDetails().version +"&r="
+            + Math.random(), true);
 
         xhr.timeout = 5000;
 
@@ -109,6 +121,7 @@ function loadDataFromServer() {
                         document.getElementById("summa").innerHTML = JSON.parse(json).summa + " руб.";
                         document.getElementById("day_before_lock").innerHTML = JSON.parse(json).day_before_lock;
                         document.getElementById("date_of_lock").innerHTML = JSON.parse(json).date_of_lock;
+                        setBadgeText(JSON.parse(json).day_before_lock);
 
                     } else if (JSON.parse(json).state == 2) {
 
