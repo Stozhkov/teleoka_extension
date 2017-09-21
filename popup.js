@@ -286,8 +286,8 @@ document.addEventListener('DOMContentLoaded', function () {
         showOrHideConfig();
     });
 
-    var what = document.getElementById("what");
-    what.addEventListener('click', function () {
+    var what2 = document.getElementById("what");
+    what2.addEventListener('click', function () {
         showOrHideInfo();
     });
 
