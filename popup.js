@@ -121,6 +121,7 @@ function loadDataFromServer() {
                         document.getElementById("summa").innerHTML = JSON.parse(json).summa + " руб.";
                         document.getElementById("day_before_lock").innerHTML = JSON.parse(json).day_before_lock;
                         document.getElementById("date_of_lock").innerHTML = JSON.parse(json).date_of_lock;
+                        document.getElementById("hash").value = JSON.parse(json).hash;
                         setBadgeText(JSON.parse(json).day_before_lock);
 
                     } else if (JSON.parse(json).state == 2) {
@@ -149,6 +150,7 @@ function loadDataFromServer() {
                         document.getElementById("uid").innerHTML = JSON.parse(json).uid;
                         document.getElementById("address").innerHTML = JSON.parse(json).address;
                         document.getElementById("payImage").style.display = "none";
+                        document.getElementById("hash").value = JSON.parse(json).hash;
 
                         notShowPacket();
                         notShowMonthlyPay();
@@ -286,8 +288,71 @@ document.addEventListener('DOMContentLoaded', function () {
         showOrHideConfig();
     });
 
-    var what2 = document.getElementById("what");
-    what2.addEventListener('click', function () {
+    var payImage = document.getElementById("payImage");
+    payImage.addEventListener('click', function () {
+        var form = document.createElement("form");
+        var element1 = document.createElement("INPUT");
+
+        form.method = "POST";
+        form.action = "http://pay.teleoka.su";
+        form.target = "_blank";
+
+        element1.setAttribute("name", "uid_ext");
+        element1.setAttribute("type", "hidden");
+        element1.setAttribute("value", document.getElementById("uid_input").value);
+
+        form.appendChild(element1);
+        document.body.appendChild(form);
+
+        form.submit();
+    });
+
+    var siteImage = document.getElementById("siteImage");
+    siteImage.addEventListener('click', function () {
+        var form = document.createElement("form");
+
+        form.method = "POST";
+        form.action = "http://телеока.рф";
+        form.target = "_blank";
+
+        document.body.appendChild(form);
+
+        form.submit();
+    });
+
+    var accountImage = document.getElementById("accountImage");
+    accountImage.addEventListener('click', function () {
+        var form = document.createElement("form");
+        var element1 = document.createElement("INPUT");
+        var element2 = document.createElement("INPUT");
+        var element3 = document.createElement("INPUT");
+
+        form.method = "POST";
+        form.action = "http://abonent.teleoka.su";
+        form.target = "_blank";
+
+        element1.setAttribute("name", "uid");
+        element1.setAttribute("type", "hidden");
+        element1.setAttribute("value", document.getElementById("uid_input").value);
+
+        element2.setAttribute("name", "hash");
+        element2.setAttribute("type", "hidden");
+        element2.setAttribute("value", document.getElementById("hash").value);
+
+        element3.setAttribute("name", "ext");
+        element3.setAttribute("type", "hidden");
+        element3.setAttribute("value", "1");
+
+        form.appendChild(element1);
+        form.appendChild(element2);
+        form.appendChild(element3);
+        document.body.appendChild(form);
+
+        form.submit();
+    });
+
+    var what = document.getElementById("what");
+    what.addEventListener('click', function () {
         showOrHideInfo();
     });
 

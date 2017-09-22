@@ -27,3 +27,34 @@
     margin-left: -25px;
     margin-top: -25px;
 }
+
+#payImage {
+    cursor: pointer;
+    width: 100px;
+}
+
+#siteImage {
+    cursor: pointer;
+    width: 30px;
+}
+
+#accountImage {
+    cursor: pointer;
+    width: 30px;
+}
+
+#what, #img {
+    width: 20px;
+}
+
+#uid_input, #password_input {
+    width: 150px;
+}
+
+#waitBlock {
+    display: none;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}

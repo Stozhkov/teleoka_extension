@@ -6,90 +6,93 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script src="popup.js"></script>
 <img id="headImage" src="head.png">
-<div class="main">
-    <div id="infoMessage" style="display: none">
-        <table width="100%">
-            <tr>
-                <td colspan="2" align="center"><b>Техническая поддержка</b></td>
-            </tr>
-            <tr>
-                <td width="50%">Телефоны</td>
-                <td width="50%" align="right">8(83171)2-20-14</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td align="right">8(83171)2-37-85</td>
-            </tr>
-            <tr>
-                <td width="50%">Электронная почта</td>
-                <td width="50%" align="right"><a href="mailto:support@teleoka.su" target="_top">support@teleoka.su</a></td>
-            </tr>
-            <tr>
-                <td width="50%">Сайт</td>
-                <td width="50%" align="right"><a href="Телеока.рф" target="_top">телеока.рф</a></td>
-            </tr>
-            <tr>
-                <td width="50%">Группа Вконтакте</td>
-                <td width="50%" align="right"><a href="https://vk.com/teleoka" target="_top">vk.com</a></td>
-            </tr>
-            <tr>
-                <td colspan="2">Режим работы технической поддержки - <b>КРУГЛОСУТОЧНЫЙ</b></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><b>Офис обслуживания абонентов</b></td>
-            </tr>
-            <tr>
-                <td>Адрес офиса:</td>
-                <td align="right">г. Павлово,<br>ул. Куйбышева д. 40</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">Режим работы офиса *</td>
-            </tr>
-            <tr>
-                <td align="right">Понедельник</td>
-                <td>8:30 - 19:00</td>
-            </tr>
-            <tr>
-                <td align="right">Вторник</td>
-                <td>8:30 - 19:00</td>
-            </tr>
-            <tr>
-                <td align="right">Среда</td>
-                <td>8:30 - 19:00</td>
-            </tr>
-            <tr>
-                <td align="right">Четверг</td>
-                <td>8:30 - 19:00</td>
-            </tr>
-            <tr>
-                <td align="right">Пятница</td>
-                <td>8:30 - 19:00</td>
-            </tr>
-            <tr>
-                <td align="right">Суббота</td>
-                <td>8:30 - 14:00</td>
-            </tr>
-            <tr>
-                <td align="right">Воскресенье</td>
-                <td>Выходной</td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <small>* Режим работы может отличаться в праздничные дни</small>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div id="statusMessage" style="display: none"></div>
-    <div id="waitBlock" style="display: none; height: 200px; text-align: center; vertical-align: middle; display: inline-block;">
-        <img id="waitImage" src='wait.gif'>
-    </div>
-    <div id="config_data" style="display: none">
+    <div class="main">
+        <div id="infoMessage" style="display: none">
+            <table width="100%">
+                <tr>
+                    <td colspan="2" align="center"><b>Техническая поддержка</b></td>
+                </tr>
+                <tr>
+                    <td width="50%">Телефоны</td>
+                    <td width="50%" align="right">8(83171)2-20-14</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="right">8(83171)2-37-85</td>
+                </tr>
+                <tr>
+                    <td width="50%">Электронная почта</td>
+                    <td width="50%" align="right">
+                        <a href="mailto:support@teleoka.su" target="_top">support@teleoka.su</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">Сайт</td>
+                    <td width="50%" align="right"><a href="http://Телеока.рф" target="_top">телеока.рф</a></td>
+                </tr>
+                <tr>
+                    <td width="50%">Группа Вконтакте</td>
+                    <td width="50%" align="right"><a href="https://vk.com/teleoka" target="_top">vk.com</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Режим работы технической поддержки - <b>КРУГЛОСУТОЧНЫЙ</b></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><b>Офис обслуживания абонентов</b></td>
+                </tr>
+                <tr>
+                    <td>Адрес офиса:</td>
+                    <td align="right">г. Павлово,<br>ул. Куйбышева д. 40</td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">Режим работы офиса *</td>
+                </tr>
+                <tr>
+                    <td align="right">Понедельник</td>
+                    <td>8:30 - 19:00</td>
+                </tr>
+                <tr>
+                    <td align="right">Вторник</td>
+                    <td>8:30 - 19:00</td>
+                </tr>
+                <tr>
+                    <td align="right">Среда</td>
+                    <td>8:30 - 19:00</td>
+                </tr>
+                <tr>
+                    <td align="right">Четверг</td>
+                    <td>8:30 - 19:00</td>
+                </tr>
+                <tr>
+                    <td align="right">Пятница</td>
+                    <td>8:30 - 19:00</td>
+                </tr>
+                <tr>
+                    <td align="right">Суббота</td>
+                    <td>8:30 - 14:00</td>
+                </tr>
+                <tr>
+                    <td align="right">Воскресенье</td>
+                    <td>Выходной</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <small>* Режим работы может отличаться в праздничные дни</small>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="statusMessage" style="display: none"></div>
+        <div id="waitBlock">
+            <img id="waitImage" src='wait.gif'>
+        </div>
+        <div id="config_data" style="display: none">
             <table width="100%">
                 <tr>
                     <td align="center">
-                        <input id="uid_input" type="text" placeholder="Лицевой счет" maxlength="5" minlength="4" style="width: 150px">
+                        <input id="uid_input" type="text" placeholder="Лицевой счет" maxlength="5" minlength="4">
                     </td>
                 </tr>
                 <tr>
@@ -97,7 +100,8 @@
                         <table>
                             <tr>
                                 <td>
-                                    <input id="password_input" type="password" placeholder="Пароль" style="width: 150px" maxlength="20"><br>
+                                    <input id="password_input" type="password" placeholder="Пароль" maxlength="20"><br>
+                                    <input id="hash" type="hidden">
                                     <label>
                                         <input id="showOrHidePassword" type="checkbox">Показать пароль
                                     </label>
@@ -154,19 +158,18 @@
             </table>
             <hr width="95%">
         </div>
-        <script src="popup.js"></script>
         <div id="links">
-            <a href="http://pay.teleoka.su"><img src="pay.png" id="payImage" title="Оплата банковской картой онлайн" style="width: 100px"></a>
-            <a href="http://телеока.рф"><img src="512.png" id="siteImage" title="Сайт Телеока.рф" style="width: 30px"></a>
-            <a href="http://abonent.teleoka.su"><img src="key.png" id="accountImage" title="Личный кабинет абонента" style="width: 30px"></a>
+            <img src="pay.png" id="payImage" title="Оплата банковской картой онлайн">
+            <img src="512.png" id="siteImage" title="Сайт Телеока.рф">
+            <img src="key.png" id="accountImage" title="Личный кабинет абонента">
             <div id="settings">
                 <table>
                     <tr>
                         <td>
-                            <img id="what" title="Информация" src="what.png" width="20px">
+                            <img id="what" title="Информация" src="what.png">
                         </td>
                         <td>
-                            <img id="img" title="Настройки" src="icons-settings.png" width="20px">
+                            <img id="img" title="Настройки" src="icons-settings.png">
                         </td>
                     </tr>
                 </table>
