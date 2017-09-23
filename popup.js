@@ -48,11 +48,24 @@ function notShowPacket() {
 }
 
 function setBadgeText(amountDays) {
-    chrome.browserAction.setBadgeText({text: amountDays.toString()});
-    if (amountDays < 6) {
-        chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+
+    if (amountDays == "X") {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+        chrome.browserAction.setBadgeText({text: amountDays.toString()});
+    } else if (amountDays == "!") {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+        chrome.browserAction.setBadgeText({text: amountDays.toString()});
     } else {
-        chrome.browserAction.setBadgeBackgroundColor({ color: [128, 128, 128, 255] });
+        if (amountDays == 0) {
+            chrome.browserAction.setBadgeText({text: ""});
+        }
+        else if ((amountDays < 6) && (amountDays > 0)) {
+            chrome.browserAction.setBadgeText({text: amountDays.toString()});
+            chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+        } else {
+            chrome.browserAction.setBadgeText({text: amountDays.toString()});
+            chrome.browserAction.setBadgeBackgroundColor({ color: [128, 128, 128, 255] });
+        }
     }
 }
 
@@ -122,7 +135,13 @@ function loadDataFromServer() {
                         document.getElementById("day_before_lock").innerHTML = JSON.parse(json).day_before_lock;
                         document.getElementById("date_of_lock").innerHTML = JSON.parse(json).date_of_lock;
                         document.getElementById("hash").value = JSON.parse(json).hash;
-                        setBadgeText(JSON.parse(json).day_before_lock);
+
+                        if(JSON.parse(json).blocked == 1) {
+                            setBadgeText("!");
+                        }
+                        else {
+                            setBadgeText(JSON.parse(json).day_before_lock);
+                        }
 
                     } else if (JSON.parse(json).state == 2) {
 
@@ -141,6 +160,7 @@ function loadDataFromServer() {
                         notShowSumma();
                         notShowDayBeforeLock();
                         notShowDateOfLock();
+                        setBadgeText("X");
 
                     } else if (JSON.parse(json).state == 3) {
 
@@ -159,6 +179,7 @@ function loadDataFromServer() {
                         notShowSumma();
                         notShowDayBeforeLock();
                         notShowDateOfLock();
+                        setBadgeText(0);
 
                     }  else if (JSON.parse(json).state == 4) {
 
@@ -175,6 +196,7 @@ function loadDataFromServer() {
                         document.getElementById("summa").innerHTML = JSON.parse(json).summa + " руб.";
                         notShowDayBeforeLock();
                         notShowDateOfLock();
+                        setBadgeText("!");
 
                     }
                 }

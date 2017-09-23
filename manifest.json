@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Teleoka",
   "description" : "Приложение помогает абонентам ООО ТелеОка ком следить за состоянием своего лицевого счета.",
-  "version": "1.4",
+  "version": "1.4.1",
   "icons": { "36": "512.png",
              "48": "512.png",
              "72": "512.png",
@@ -14,7 +14,6 @@
   },
   "permissions": [
     "http://abonent.teleoka.su/*",
-    "http://192.168.8.46/*",
     "storage",
     "notifications",
     "alarms"

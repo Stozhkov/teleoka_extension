@@ -1,9 +1,29 @@
-function setBadgeText(amountDays) {
-    chrome.browserAction.setBadgeText({text: amountDays.toString()});
-    if (amountDays < 6) {
-        chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+function setBadgeText(amountDays, blocked) {
+
+    if (amountDays == "X") {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+        chrome.browserAction.setBadgeText({text: amountDays.toString()});
+    } else if (amountDays == "!") {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+        chrome.browserAction.setBadgeText({text: amountDays.toString()});
     } else {
-        chrome.browserAction.setBadgeBackgroundColor({ color: [128, 128, 128, 255] });
+
+        if(blocked == 1) {
+            chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+            chrome.browserAction.setBadgeText({text: "!"});
+        }
+        else {
+            if (amountDays == 0) {
+                chrome.browserAction.setBadgeText({text: ""});
+            }
+            else if ((amountDays < 6) && (amountDays > 0)) {
+                chrome.browserAction.setBadgeText({text: amountDays.toString()});
+                chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
+            } else {
+                chrome.browserAction.setBadgeText({text: amountDays.toString()});
+                chrome.browserAction.setBadgeBackgroundColor({ color: [128, 128, 128, 255] });
+            }
+        }
     }
 }
 
@@ -36,7 +56,7 @@ function loadDataFromServer() {
 
                     if (JSON.parse(json).state == 1) {
 
-                        setBadgeText(JSON.parse(json).day_before_lock);
+                        setBadgeText(JSON.parse(json).day_before_lock, JSON.parse(json).blocked);
 
                     }
                 }
