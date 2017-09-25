@@ -98,4 +98,6 @@ chrome.alarms.onAlarm.addListener(function() {
 
 chrome.alarms.create('', { periodInMinutes: 120 });
 
+chrome.browserAction.setBadgeText({text: ""});
+
 load();
