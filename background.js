@@ -37,12 +37,9 @@ function loadDataFromServer() {
     if ((uid != "") && (password != "")) {
 
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://abonent.teleoka.su/chrome-extensions-gate.php?uid="
-            + uid +"&password="
-            + password +"&version="
-            + chrome.app.getDetails().version +"&r="
-            + Math.random(), true);
 
+        xhr.open("POST", "http://abonent.teleoka.su/chrome-extensions-gate.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.timeout = 5000;
 
         xhr.onreadystatechange = function() {
@@ -62,7 +59,11 @@ function loadDataFromServer() {
                 }
             }
         }
-        xhr.send();
+        xhr.send("uid="
+            + uid +"&password="
+            + password +"&version="
+            + chrome.app.getDetails().version +"&r="
+            + Math.random());
     }
 }
 
