@@ -43,6 +43,11 @@
     width: 30px;
 }
 
+#speedTestImage {
+    cursor: pointer;
+    width: 30px;
+}
+
 #what, #img {
     width: 20px;
 }

@@ -343,6 +343,19 @@ document.addEventListener('DOMContentLoaded', function () {
         form.submit();
     });
 
+    var speedTestImage = document.getElementById("speedTestImage");
+    speedTestImage.addEventListener('click', function () {
+        var form = document.createElement("form");
+
+        form.method = "POST";
+        form.action = "http://teleoka.speedtestcustom.com/";
+        form.target = "_blank";
+
+        document.body.appendChild(form);
+
+        form.submit();
+    });
+
     var accountImage = document.getElementById("accountImage");
     accountImage.addEventListener('click', function () {
         var form = document.createElement("form");
