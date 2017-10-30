@@ -49,14 +49,14 @@ function notShowPacket() {
 
 function setBadgeText(amountDays) {
 
-    if (amountDays == "X") {
+    if (amountDays === "X") {
         chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
         chrome.browserAction.setBadgeText({text: amountDays.toString()});
-    } else if (amountDays == "!") {
+    } else if (amountDays === "!") {
         chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
         chrome.browserAction.setBadgeText({text: amountDays.toString()});
     } else {
-        if (amountDays == 0) {
+        if (amountDays === 0) {
             chrome.browserAction.setBadgeText({text: ""});
         }
         else if ((amountDays < 6) && (amountDays > 0)) {
@@ -76,7 +76,7 @@ function loadDataFromServer() {
 
 
 
-    if ((uid != "") && (password != "")) {
+    if ((uid !== "") && (password !== "")) {
 
         var xhr = new XMLHttpRequest();
 
@@ -89,12 +89,12 @@ function loadDataFromServer() {
 
         xhr.onreadystatechange = function() {
 
-            if (xhr.readyState == 4)
+            if (xhr.readyState === 4)
             {
                 document.getElementById("waitBlock").style.display = "none";
                 document.getElementById("users_data").style.display = "block";
 
-                if (xhr.status != 200 ) {
+                if (xhr.status !== 200 ) {
                     document.getElementById("users_data").style.display = "none";
                     document.getElementById("statusMessage").style.display = "block";
                     document.getElementById("statusMessage").innerHTML = "<center><b>Ошибка</b></center>" +
@@ -103,7 +103,7 @@ function loadDataFromServer() {
 
                     var json = xhr.responseText;
 
-                    if (JSON.parse(json).state == 0) {
+                    if (JSON.parse(json).state === 0) {
 
                         document.getElementById("users_data").style.display = "none";
                         document.getElementById("statusMessage").style.display = "block";
@@ -112,9 +112,9 @@ function loadDataFromServer() {
                         document.getElementById("payImage").style.display = "none";
                         document.getElementById("accountImage").style.display = "none";
 
-                    } else if (JSON.parse(json).state == 1) {
+                    } else if (JSON.parse(json).state === 1) {
 
-                        if(JSON.parse(json).blocked == 1) {
+                        if(JSON.parse(json).blocked === 1) {
                             document.getElementById("statusMessage").style.display = "block";
                             document.getElementById("statusMessage").innerHTML = "<center><b>Интернет заблокирован</b></center>" +
                                 "Доступ в интернет заблокирован свяжитесь с администратором.<hr width='95%'> ";
@@ -133,14 +133,14 @@ function loadDataFromServer() {
                         document.getElementById("date_of_lock").innerHTML = JSON.parse(json).date_of_lock;
                         document.getElementById("hash").value = JSON.parse(json).hash;
 
-                        if(JSON.parse(json).blocked == 1) {
+                        if(JSON.parse(json).blocked === 1) {
                             setBadgeText("!");
                         }
                         else {
                             setBadgeText(JSON.parse(json).day_before_lock);
                         }
 
-                    } else if (JSON.parse(json).state == 2) {
+                    } else if (JSON.parse(json).state === 2) {
 
                         document.getElementById("statusMessage").style.display = "block";
                         document.getElementById("statusMessage").innerHTML = "<center><b>Договор расторгнут.</b></center>" +
@@ -159,7 +159,7 @@ function loadDataFromServer() {
                         notShowDateOfLock();
                         setBadgeText("X");
 
-                    } else if (JSON.parse(json).state == 3) {
+                    } else if (JSON.parse(json).state === 3) {
 
                         document.getElementById("statusMessage").style.display = "block";
                         document.getElementById("statusMessage").innerHTML = "<center><b>Корпоративный тариф.</b></center>" +
@@ -178,7 +178,7 @@ function loadDataFromServer() {
                         notShowDateOfLock();
                         setBadgeText(0);
 
-                    }  else if (JSON.parse(json).state == 4) {
+                    }  else if (JSON.parse(json).state === 4) {
 
                         document.getElementById("users_data").style.display = "block";
                         document.getElementById("statusMessage").style.display = "block";
@@ -198,7 +198,8 @@ function loadDataFromServer() {
                     }
                 }
             }
-        }
+        };
+
         xhr.send("uid="
             + uid +"&password="
             + password +"&version="
@@ -246,7 +247,7 @@ function load() {
 }
 
 function showOrHideConfig() {
-    if (document.getElementById("config_data").style.display == "none") {
+    if (document.getElementById("config_data").style.display === "none") {
         document.getElementById("img").src = "return.png";
         document.getElementById("users_data").style.display = "none";
         document.getElementById("links").style.display = "none";
@@ -263,7 +264,7 @@ function showOrHideConfig() {
 }
 
 function showOrHideInfo() {
-    if (document.getElementById("infoMessage").style.display == "none") {
+    if (document.getElementById("infoMessage").style.display === "none") {
         document.getElementById("infoMessage").style.display = "block";
         document.getElementById("config_data").style.display = "none";
         document.getElementById("users_data").style.display = "none";
@@ -281,7 +282,7 @@ function showOrHideInfo() {
 }
 
 function showOrHidePassword() {
-    if (document.getElementById("password_input").type == "password") {
+    if (document.getElementById("password_input").type === "password") {
         document.getElementById("password_input").type = "text";
     } else {
         document.getElementById("password_input").type = "password";

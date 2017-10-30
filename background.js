@@ -1,19 +1,19 @@
 function setBadgeText(amountDays, blocked) {
 
-    if (amountDays == "X") {
+    if (amountDays === "X") {
         chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
         chrome.browserAction.setBadgeText({text: amountDays.toString()});
-    } else if (amountDays == "!") {
+    } else if (amountDays === "!") {
         chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
         chrome.browserAction.setBadgeText({text: amountDays.toString()});
     } else {
 
-        if(blocked == 1) {
+        if(blocked === 1) {
             chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
             chrome.browserAction.setBadgeText({text: "!"});
         }
         else {
-            if (amountDays == 0) {
+            if (amountDays === 0) {
                 chrome.browserAction.setBadgeText({text: ""});
             }
             else if ((amountDays < 6) && (amountDays > 0)) {
@@ -27,14 +27,14 @@ function setBadgeText(amountDays, blocked) {
     }
 }
 
-function loadDataFromServer() {
+function loadDataFromServer(showNotification = false) {
 
     var uid = userData.uid;
     var password = userData.pwd;
 
 
 
-    if ((uid != "") && (password != "")) {
+    if ((uid !== "") && (password !== "")) {
 
         var xhr = new XMLHttpRequest();
 
@@ -44,21 +44,35 @@ function loadDataFromServer() {
 
         xhr.onreadystatechange = function() {
 
-            if (xhr.readyState == 4)
+            if (xhr.readyState === 4)
             {
 
-                if (xhr.status == 200 ) {
+                if (xhr.status === 200 ) {
 
                     var json = xhr.responseText;
 
-                    if (JSON.parse(json).state == 1) {
+                    if (JSON.parse(json).state === 1) {
 
                         setBadgeText(JSON.parse(json).day_before_lock, JSON.parse(json).blocked);
+
+                        if (showNotification && JSON.parse(json).day_before_lock < 6) {
+
+                            chrome.notifications.create(
+                                'notification',{
+                                    type: 'basic',
+                                    iconUrl: '512.png',
+                                    title: "Телеока",
+                                    message: "Уважаеемый абонент.\nВо избежание отключения от сети Интернет, рекомендуем вам пополнить счет."
+                                }
+                            );
+
+                        }
 
                     }
                 }
             }
-        }
+        };
+
         xhr.send("uid="
             + uid +"&password="
             + password +"&version="
@@ -67,7 +81,7 @@ function loadDataFromServer() {
     }
 }
 
-function load() {
+function load(showNotification = false) {
     chrome.storage.sync.get('userUID', function (result) {
 
         if(result.userUID) {
@@ -85,7 +99,7 @@ function load() {
 
         }
 
-        loadDataFromServer();
+        loadDataFromServer(showNotification);
     });
 }
 
@@ -97,8 +111,8 @@ chrome.alarms.onAlarm.addListener(function() {
     load();
 });
 
-chrome.alarms.create('', { periodInMinutes: 120 });
+chrome.alarms.create('', { periodInMinutes: 1 });
 
 chrome.browserAction.setBadgeText({text: ""});
 
-load();
+load(true);
