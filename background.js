@@ -111,7 +111,7 @@ chrome.alarms.onAlarm.addListener(function() {
     load();
 });
 
-chrome.alarms.create('', { periodInMinutes: 1 });
+chrome.alarms.create('', { periodInMinutes: 120 });
 
 chrome.browserAction.setBadgeText({text: ""});
 
