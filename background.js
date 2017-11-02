@@ -29,14 +29,14 @@ function setBadgeText(amountDays, blocked) {
 
 function loadDataFromServer(showNotification = false) {
 
-    var uid = userData.uid;
-    var password = userData.pwd;
+    let uid = userData.uid;
+    let password = userData.pwd;
 
 
 
     if ((uid !== "") && (password !== "")) {
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
 
         xhr.open("POST", "http://abonent.teleoka.su/chrome-extensions-gate.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -49,13 +49,13 @@ function loadDataFromServer(showNotification = false) {
 
                 if (xhr.status === 200 ) {
 
-                    var json = xhr.responseText;
+                    let userData = JSON.parse(xhr.responseText);
 
-                    if (JSON.parse(json).state === 1) {
+                    if (userData['state'] === 1) {
 
-                        setBadgeText(JSON.parse(json).day_before_lock, JSON.parse(json).blocked);
+                        setBadgeText(userData['day_before_lock'], userData['blocked']);
 
-                        if (showNotification && JSON.parse(json).day_before_lock < 6) {
+                        if (showNotification && userData['day_before_lock'] < 6) {
 
                             chrome.notifications.create(
                                 'notification',{
@@ -84,18 +84,18 @@ function loadDataFromServer(showNotification = false) {
 function load(showNotification = false) {
     chrome.storage.sync.get('userUID', function (result) {
 
-        if(result.userUID) {
+        if(result['userUID']) {
 
-            userData.uid = result.userUID;
+            userData.uid = result['userUID'];
 
         }
     });
 
     chrome.storage.sync.get('userPassword', function (result) {
 
-        if(result.userPassword) {
+        if(result['userPassword']) {
 
-           userData.pwd = result.userPassword;
+           userData.pwd = result['userPassword'];
 
         }
 
@@ -103,7 +103,7 @@ function load(showNotification = false) {
     });
 }
 
-var userData = new Object();
+let userData = {};
 userData.uid = "";
 userData.pwd = "";
 

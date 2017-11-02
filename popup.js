@@ -12,10 +12,10 @@ function notShowDayBeforeLock() {
 
 }
 
-function notShowSumma() {
+function notShowSum() {
 
-    document.getElementById("summa").style.display = "none";
-    document.getElementById("summa_label").style.display = "none";
+    document.getElementById("sum").style.display = "none";
+    document.getElementById("sum_label").style.display = "none";
 
 }
 
@@ -71,14 +71,14 @@ function setBadgeText(amountDays) {
 
 function loadDataFromServer() {
 
-    var uid = document.getElementById("uid_input").value;
-    var password = document.getElementById("password_input").value;
+    let uid = document.getElementById("uid_input").value;
+    let password = document.getElementById("password_input").value;
 
 
 
     if ((uid !== "") && (password !== "")) {
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
 
         xhr.open("POST", "http://abonent.teleoka.su/chrome-extensions-gate.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -97,56 +97,56 @@ function loadDataFromServer() {
                 if (xhr.status !== 200 ) {
                     document.getElementById("users_data").style.display = "none";
                     document.getElementById("statusMessage").style.display = "block";
-                    document.getElementById("statusMessage").innerHTML = "<center><b>Ошибка</b></center>" +
+                    document.getElementById("statusMessage").innerHTML = "<b>Ошибка</b><br>" +
                         "Нет подключения к серверу.<hr width='95%'> ";
                 } else {
 
-                    var json = xhr.responseText;
+                    let userData = JSON.parse(xhr.responseText);
 
-                    if (JSON.parse(json).state === 0) {
+                    if (userData['state'] === 0) {
 
                         document.getElementById("users_data").style.display = "none";
                         document.getElementById("statusMessage").style.display = "block";
-                        document.getElementById("statusMessage").innerHTML = "<center><b>Ошибка.</b></center>" +
+                        document.getElementById("statusMessage").innerHTML = "<b>Ошибка.</b><br>" +
                             "Неверно введен номер договора или пароль.<hr width='95%'> ";
                         document.getElementById("payImage").style.display = "none";
                         document.getElementById("accountImage").style.display = "none";
 
-                    } else if (JSON.parse(json).state === 1) {
+                    } else if (userData['state'] === 1) {
 
-                        if(JSON.parse(json).blocked === 1) {
+                        if(userData['blocked'] === 1) {
                             document.getElementById("statusMessage").style.display = "block";
-                            document.getElementById("statusMessage").innerHTML = "<center><b>Интернет заблокирован</b></center>" +
+                            document.getElementById("statusMessage").innerHTML = "<b>Интернет заблокирован</b><br>" +
                                 "Доступ в интернет заблокирован свяжитесь с администратором.<hr width='95%'> ";
                             notShowDayBeforeLock();
                             notShowDateOfLock();
                         }
 
-                        document.getElementById("uid").innerHTML = JSON.parse(json).uid;
-                        document.getElementById("packet").innerHTML = JSON.parse(json).packet;
-                        document.getElementById("monthly_pay").innerHTML = JSON.parse(json).monthly_pay + " руб.";
-                        document.getElementById("address").innerHTML = JSON.parse(json).address;
-                        document.getElementById("deposit").innerHTML = JSON.parse(json).deposit + " руб.";
-                        document.getElementById("bonus").innerHTML = JSON.parse(json).bonus + " руб.";
-                        document.getElementById("summa").innerHTML = JSON.parse(json).summa + " руб.";
-                        document.getElementById("day_before_lock").innerHTML = JSON.parse(json).day_before_lock;
-                        document.getElementById("date_of_lock").innerHTML = JSON.parse(json).date_of_lock;
-                        document.getElementById("hash").value = JSON.parse(json).hash;
+                        document.getElementById("uid").innerHTML = userData['uid'];
+                        document.getElementById("packet").innerHTML = userData['packet'];
+                        document.getElementById("monthly_pay").innerHTML = userData['monthly_pay'] + " руб.";
+                        document.getElementById("address").innerHTML = userData['address'];
+                        document.getElementById("deposit").innerHTML = userData['deposit'] + " руб.";
+                        document.getElementById("bonus").innerHTML = userData['bonus'] + " руб.";
+                        document.getElementById("sum").innerHTML = userData['sum'] + " руб.";
+                        document.getElementById("day_before_lock").innerHTML = userData['day_before_lock'];
+                        document.getElementById("date_of_lock").innerHTML = userData['date_of_lock'];
+                        document.getElementById("hash").value = userData['hash'];
 
-                        if(JSON.parse(json).blocked === 1) {
+                        if(userData['blocked'] === 1) {
                             setBadgeText("!");
                         }
                         else {
-                            setBadgeText(JSON.parse(json).day_before_lock);
+                            setBadgeText(userData['day_before_lock']);
                         }
 
-                    } else if (JSON.parse(json).state === 2) {
+                    } else if (userData['state'] === 2) {
 
                         document.getElementById("statusMessage").style.display = "block";
-                        document.getElementById("statusMessage").innerHTML = "<center><b>Договор расторгнут.</b></center>" +
+                        document.getElementById("statusMessage").innerHTML = "<b>Договор расторгнут.</b><br>" +
                             "Для возобновления доступа в Интернет необходимо заключить договор. Свяжитесь с администраторм.<hr width='95%'> ";
-                        document.getElementById("uid").innerHTML = JSON.parse(json).uid;
-                        document.getElementById("address").innerHTML = JSON.parse(json).address;
+                        document.getElementById("uid").innerHTML = userData['uid'];
+                        document.getElementById("address").innerHTML = userData['address'];
                         document.getElementById("payImage").style.display = "none";
                         document.getElementById("accountImage").style.display = "none";
 
@@ -154,43 +154,43 @@ function loadDataFromServer() {
                         notShowMonthlyPay();
                         notShowDeposit();
                         notShowBonus();
-                        notShowSumma();
+                        notShowSum();
                         notShowDayBeforeLock();
                         notShowDateOfLock();
                         setBadgeText("X");
 
-                    } else if (JSON.parse(json).state === 3) {
+                    } else if (userData['state'] === 3) {
 
                         document.getElementById("statusMessage").style.display = "block";
-                        document.getElementById("statusMessage").innerHTML = "<center><b>Корпоративный тариф.</b></center>" +
+                        document.getElementById("statusMessage").innerHTML = "<b>Корпоративный тариф.</b><br>" +
                             " Доступ в интернет предоставляется бесплатно.<hr width='95%'> ";
-                        document.getElementById("uid").innerHTML = JSON.parse(json).uid;
-                        document.getElementById("address").innerHTML = JSON.parse(json).address;
+                        document.getElementById("uid").innerHTML = userData['uid'];
+                        document.getElementById("address").innerHTML = userData['address'];
                         document.getElementById("payImage").style.display = "none";
-                        document.getElementById("hash").value = JSON.parse(json).hash;
+                        document.getElementById("hash").value = userData['hash'];
 
                         notShowPacket();
                         notShowMonthlyPay();
                         notShowDeposit();
                         notShowBonus();
-                        notShowSumma();
+                        notShowSum();
                         notShowDayBeforeLock();
                         notShowDateOfLock();
                         setBadgeText(0);
 
-                    }  else if (JSON.parse(json).state === 4) {
+                    }  else if (userData['state'] === 4) {
 
                         document.getElementById("users_data").style.display = "block";
                         document.getElementById("statusMessage").style.display = "block";
-                        document.getElementById("statusMessage").innerHTML = "<center><b>Денег на счету нет</b></center>" +
+                        document.getElementById("statusMessage").innerHTML = "<b>Денег на счету нет</b><br>" +
                             "Для возобнавления доступа в интернет необходимо пополнить лицевой счет.<hr width='95%'>";
-                        document.getElementById("uid").innerHTML = JSON.parse(json).uid;
-                        document.getElementById("packet").innerHTML = JSON.parse(json).packet;
-                        document.getElementById("monthly_pay").innerHTML = JSON.parse(json).monthly_pay + " руб.";
-                        document.getElementById("address").innerHTML = JSON.parse(json).address;
-                        document.getElementById("deposit").innerHTML = JSON.parse(json).deposit + " руб.";
-                        document.getElementById("bonus").innerHTML = JSON.parse(json).bonus + " руб.";
-                        document.getElementById("summa").innerHTML = JSON.parse(json).summa + " руб.";
+                        document.getElementById("uid").innerHTML = userData['uid'];
+                        document.getElementById("packet").innerHTML = userData['packet'];
+                        document.getElementById("monthly_pay").innerHTML = userData['monthly_pay'] + " руб.";
+                        document.getElementById("address").innerHTML = userData['address'];
+                        document.getElementById("deposit").innerHTML = userData['deposit'] + " руб.";
+                        document.getElementById("bonus").innerHTML = userData['bonus'] + " руб.";
+                        document.getElementById("sum").innerHTML = userData['sum'] + " руб.";
                         notShowDayBeforeLock();
                         notShowDateOfLock();
                         setBadgeText("!");
@@ -211,7 +211,7 @@ function loadDataFromServer() {
         document.getElementById("waitBlock").style.display = "none";
         document.getElementById("statusMessage").style.display = "block";
         document.getElementById("config_data").style.display = "block";
-        document.getElementById("statusMessage").innerHTML = "<center><b>Приложение не настроено</b></center>" +
+        document.getElementById("statusMessage").innerHTML = "<b>Приложение не настроено</b><br>" +
             " Перед началом работы, необходимо ввести номер лицевого счета и пароль с договора.<hr width='95%'>";
     }
 }
@@ -219,9 +219,9 @@ function loadDataFromServer() {
 function load() {
     chrome.storage.sync.get('userUID', function (result) {
 
-        if(result.userUID) {
+        if(result['userUID']) {
 
-            document.getElementById("uid_input").value = result.userUID;
+            document.getElementById("uid_input").value = result['userUID'];
 
         } else {
 
@@ -232,9 +232,9 @@ function load() {
 
     chrome.storage.sync.get('userPassword', function (result) {
 
-        if(result.userPassword) {
+        if(result['userPassword']) {
 
-            document.getElementById("password_input").value = result.userPassword;
+            document.getElementById("password_input").value = result['userPassword'];
 
         } else {
 
@@ -248,14 +248,14 @@ function load() {
 
 function showOrHideConfig() {
     if (document.getElementById("config_data").style.display === "none") {
-        document.getElementById("img").src = "return.png";
+        document.getElementById("settingBtn").src = "return.png";
         document.getElementById("users_data").style.display = "none";
         document.getElementById("links").style.display = "none";
         document.getElementById("config_data").style.display = "block";
         document.getElementById("statusMessage").style.display = "none";
         document.getElementById("infoMessage").style.display = "none";
     } else {
-        document.getElementById("img").src = "icons-settings.png";
+        document.getElementById("settingBtn").src = "icons-settings.png";
         document.getElementById("users_data").style.display = "block";
         document.getElementById("links").style.display = "block";
         document.getElementById("config_data").style.display = "none";
@@ -269,14 +269,14 @@ function showOrHideInfo() {
         document.getElementById("config_data").style.display = "none";
         document.getElementById("users_data").style.display = "none";
         document.getElementById("statusMessage").style.display = "none";
-        document.getElementById("what").src = "return.png";
-        document.getElementById("img").style.display = "none";
+        document.getElementById("helpBtn").src = "return.png";
+        document.getElementById("settingBtn").style.display = "none";
     } else {
         document.getElementById("infoMessage").style.display = "none";
         document.getElementById("users_data").style.display = "block";
-        document.getElementById("what").src = "what.png";
-        document.getElementById("what").style.display = "block";
-        document.getElementById("img").style.display = "block";
+        document.getElementById("helpBtn").src = "help.png";
+        document.getElementById("helpBtn").style.display = "block";
+        document.getElementById("settingBtn").style.display = "block";
 
     }
 }
@@ -297,25 +297,25 @@ function saveConfig() {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    var links = document.getElementsByTagName("a");
-    for (var i = 0; i < links.length; i++) {
+    let links = document.getElementsByTagName("a");
+    for (let i = 0; i < links.length; i++) {
         (function () {
-            var ln = links[i];
-            var location = ln.href;
+            let ln = links[i];
+            let location = ln.href;
             ln.onclick = function () {
                 chrome.tabs.create({active: true, url: location});
             };
         })();
     }
-    var img = document.getElementById("img");
-    img.addEventListener('click', function () {
+    let settingBtn = document.getElementById("settingBtn");
+    settingBtn.addEventListener('click', function () {
         showOrHideConfig();
     });
 
-    var payImage = document.getElementById("payImage");
+    let payImage = document.getElementById("payImage");
     payImage.addEventListener('click', function () {
-        var form = document.createElement("form");
-        var element1 = document.createElement("INPUT");
+        let form = document.createElement("form");
+        let element1 = document.createElement("INPUT");
 
         form.method = "POST";
         form.action = "http://pay.teleoka.su";
@@ -331,9 +331,9 @@ document.addEventListener('DOMContentLoaded', function () {
         form.submit();
     });
 
-    var siteImage = document.getElementById("siteImage");
+    let siteImage = document.getElementById("siteImage");
     siteImage.addEventListener('click', function () {
-        var form = document.createElement("form");
+        let form = document.createElement("form");
 
         form.method = "POST";
         form.action = "http://телеока.рф";
@@ -344,9 +344,9 @@ document.addEventListener('DOMContentLoaded', function () {
         form.submit();
     });
 
-    var speedTestImage = document.getElementById("speedTestImage");
+    let speedTestImage = document.getElementById("speedTestImage");
     speedTestImage.addEventListener('click', function () {
-        var form = document.createElement("form");
+        let form = document.createElement("form");
 
         form.method = "POST";
         form.action = "http://teleoka.speedtestcustom.com/";
@@ -357,12 +357,12 @@ document.addEventListener('DOMContentLoaded', function () {
         form.submit();
     });
 
-    var accountImage = document.getElementById("accountImage");
+    let accountImage = document.getElementById("accountImage");
     accountImage.addEventListener('click', function () {
-        var form = document.createElement("form");
-        var element1 = document.createElement("INPUT");
-        var element2 = document.createElement("INPUT");
-        var element3 = document.createElement("INPUT");
+        let form = document.createElement("form");
+        let element1 = document.createElement("INPUT");
+        let element2 = document.createElement("INPUT");
+        let element3 = document.createElement("INPUT");
 
         form.method = "POST";
         form.action = "http://abonent.teleoka.su";
@@ -388,18 +388,18 @@ document.addEventListener('DOMContentLoaded', function () {
         form.submit();
     });
 
-    var what = document.getElementById("what");
-    what.addEventListener('click', function () {
+    let helpBtn = document.getElementById("helpBtn");
+    helpBtn.addEventListener('click', function () {
         showOrHideInfo();
     });
 
-    var saveBtn = document.getElementById("saveBtn");
+    let saveBtn = document.getElementById("saveBtn");
     saveBtn.addEventListener('click', function () {
         saveConfig();
-    })
+    });
 
-    var what = document.getElementById("showOrHidePassword");
-    what.addEventListener('click', function () {
+    let showOrHidePasswordBtn = document.getElementById("showOrHidePasswordBtn");
+    showOrHidePasswordBtn.addEventListener('click', function () {
         showOrHidePassword();
     });
 });
