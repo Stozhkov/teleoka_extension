@@ -1,4 +1,4 @@
-function setBadgeText(amountDays, blocked) {
+function setBadgeText(amountDays, blocked = false) {
 
     if (amountDays === "X") {
         chrome.browserAction.setBadgeBackgroundColor({ color: [204, 0, 0, 255] });
@@ -25,6 +25,19 @@ function setBadgeText(amountDays, blocked) {
             }
         }
     }
+}
+
+function showNotifications(notificationText) {
+
+    chrome.notifications.create(
+        'notification',{
+            type: 'basic',
+            iconUrl: '512.png',
+            title: "Телеока",
+            message: notificationText
+        }
+    );
+
 }
 
 function loadDataFromServer(showNotification = false) {
@@ -57,17 +70,19 @@ function loadDataFromServer(showNotification = false) {
 
                         if (showNotification && userData['day_before_lock'] < 6) {
 
-                            chrome.notifications.create(
-                                'notification',{
-                                    type: 'basic',
-                                    iconUrl: '512.png',
-                                    title: "Телеока",
-                                    message: "Уважаеемый абонент.\nВо избежание отключения от сети Интернет, рекомендуем вам пополнить счет."
-                                }
-                            );
+                            showNotifications("Уважаеемый абонент.\nВо избежание отключения от сети Интернет, рекомендуем вам пополнить счет.");
 
                         }
 
+                    } else if (userData['state'] === 4) {
+
+                        setBadgeText("!", userData['blocked']);
+
+                        if (showNotification) {
+
+                            showNotifications("Уважаеемый абонент.\nДоступ в Интернент приостановлен.\nДля возобнавления доступа в интернет необходимо пополнить лицевой счет.");
+
+                        }
                     }
                 }
             }

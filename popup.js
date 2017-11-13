@@ -196,6 +196,9 @@ function loadDataFromServer() {
                         setBadgeText("!");
 
                     }
+
+                    userData = null;
+
                 }
             }
         };
@@ -205,6 +208,7 @@ function loadDataFromServer() {
             + password +"&version="
             + chrome.app.getDetails().version +"&r="
             + Math.random());
+
     } else {
         document.getElementById("users_data").style.display = "none";
         document.getElementById("links").style.display = "none";
@@ -307,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         })();
     }
+
     let settingBtn = document.getElementById("settingBtn");
     settingBtn.addEventListener('click', function () {
         showOrHideConfig();
